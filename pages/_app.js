@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Layout from "../components/global/Layout";
 import { UserProvider } from "../contexts/UserContext";
 import "bootstrap/dist/css/bootstrap-reboot.css";
@@ -6,7 +6,12 @@ import { useWindowWidth } from "@react-hook/window-size";
 
 function MyApp({ Component, pageProps }) {
   const onlyWidth = useWindowWidth();
-  const [isMobile, setIsMobile] = useState(onlyWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(()=>{
+    setIsMobile(onlyWidth < 768)
+  },[onlyWidth])
+
   return !isMobile ? (
     <>
       <UserProvider>
